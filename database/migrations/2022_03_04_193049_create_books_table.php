@@ -23,7 +23,6 @@ class CreateBooksTable extends Migration
             $table->string('description')->nullable();
             $table->string('publishing_company');
             $table->boolean('status')->default(1);
-            $table->integer('amount');
             $table->datetime('published_at');
             $table->timestamps();
         });

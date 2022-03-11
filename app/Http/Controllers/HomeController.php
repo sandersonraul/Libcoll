@@ -1,23 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use stdClass;
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $userType = Auth::user()->userType;
 
-        if($userType == 'admin'){
-            return view('admin.adminDashboard');
-        }
-        if($userType == 'librarian'){
-            return view('librarian.librarianDashboard');
-        } else{
-            return view('dashboard');
-        }
+    public function __construct(User $user)
+    {
+        $this->middleware('auth');
+        $this->user = $user;
+    }
+
+
+    public function dashboard()
+    {
+        $this->middleware('auth');
+        $this->user = $user;
+
+        $user_counters = new stdClass;
+        $user_counters->all_users = $this->user->all()->count();
+        $user_counters->admin_users = $this->user->where('userType','admin')->count();
+        $user_counters->librarian_users = $this->user->where('userType','librarian')->count();
+        $user_counters->users = $this->user->where('userType','user')->count();
+
+        $users = $this->user->paginate(5);
+
+        return view('dashboard',['users'=>$users,
+                            'user_counters'=>$user_counters]);
     }
 }

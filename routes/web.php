@@ -18,16 +18,19 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::get('/home', [HomeController::class, "index"]);
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/new/book','BooksController@create')->name('new_book');
 Route::post('/new/book','BooksController@store')->name('save_book');
-Route::get('/show/books','BooksController@show')->name('showAll');
+Route::get('/show/books','BooksController@showAll')->name('showAll');
+Route::get('/show/book{id}','BooksController@show')->name('show_book');
 Route::get('/delete/book{id}','BooksController@destroy')->name('destroy_book');
 Route::get('/edit/book{id}','BooksController@edit')->name('edit_book');
 Route::post('/edit/book{id}','BooksController@update')->name('update_book');
 
+Route::get('/new/user','UsersController@create')->name('new_user');
+Route::post('/new/user','UsersController@store')->name('save_user');
+Route::get('/show/user{id}','UsersController@show')->name('show_user');
+Route::get('/edit/user{id}','UsersController@edit')->name('edit_user');
+Route::post('/edit/user{id}','UsersController@update')->name('update_user');
+Route::get('/users/index','UsersController@showAll')->name('showAllUsers');

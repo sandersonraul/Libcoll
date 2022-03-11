@@ -45,10 +45,11 @@ return [
     |
     */
 
-    'logo' => '<i class="fas fa-book"></i> Libcoll',
-    'logo_img' =>null,
-    'logo_img_class' => null,
-    'logo_img_xl' => null,
+    'logo' => null,
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img_class' => 'brand-image-xl',
+    'logo_img_xl' => 'brand-image-xl',
+    'logo_img_xl_class' => 'brand-image-xl',
     'logo_img_alt' => null,
 
 
@@ -188,7 +189,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -235,7 +236,7 @@ return [
         ],
         [
             'text' => 'Dashboard',
-            'url'  => '/home',
+            'url'  => '/dashboard',
             'icon' => 'fas fa-tachometer-alt',
             //'can'  => 'is_admin',
         ],
@@ -247,7 +248,7 @@ return [
         ],
         [
             'text' => 'Users Management',
-            'url'  => '',
+            'url'  => '/users/index',
             'icon' => 'fa fa-users',
             'can'  => 'is_admin',
         ],

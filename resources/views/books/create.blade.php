@@ -10,17 +10,17 @@
 @section('content')
 <form class="row g-3" action="{{ route('save_book') }}" method="POST">
   @csrf
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-6">
     <label for="title" class="form-label">Title</label>
     <input id="title" name="title" type="text" class="form-control">
   </div>
 
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-6">
     <label for="author" class="form-label">Author</label>
     <input id="author" name="author" type="text" class="form-control">
   </div>
 
-  <div class="form-group col-md-4">
+  <div class="form-group col-md-6">
     <label for="isbn" class="form-label">ISBN</label>
     <input id="isbn" name="isbn" type="text" class="form-control">
   </div>
@@ -46,14 +46,10 @@
   </div>
 
   <div class="form-group col-md-6">
-    <label for="amount" class="form-label">Amount</label>
-    <input id="amount" name="amount" type="number" class="form-control">
-  </div>
-
-  <div class="form-group col-md-6">
     <label for="published_at" class="form-label">Published at</label>
     <input id="published_at" name="published_at" type="text" class="form-control">
   </div>
+  <br>
 <div class="col-auto">
     <a href="{{ route('showAll') }}" class="btn btn-secondary" >Cancel</a>
 </div>

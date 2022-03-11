@@ -26,9 +26,9 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('is_admin', function ($user){
-            return $user->userType == 'admin' ?true :false;
+            if($user->userType == 'admin' || $user->userType == 'librarian'){
+                return true;
+            }
         });
-
-        //
     }
 }

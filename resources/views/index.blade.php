@@ -34,12 +34,21 @@
                 <div id="search-btn" class="fas fa-search"></div>
                 <a href="{{ route('home') }}">Início</a>
                 <a href="catalogo.html">Catálogo</a>
-                
-                <a href="#" id="login-btn">Entrar</a>
                 @if (Route::has('login'))
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline"> {{ __('Profile') }}</a>
+                    <a href="{{ route('dashboard') }}">Profile</a>
+                    @php( $logout_url = View::getSection('logout_url') ?? config('adminlte.logout_url', 'logout') )
+                    <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{ __('adminlte::adminlte.log_out') }}
+                    </a>
+                    <form id="logout-form" action="{{ $logout_url }}" method="POST" style="display: none;">
+                        @if(config('adminlte.logout_method'))
+                            {{ method_field(config('adminlte.logout_method')) }}
+                        @endif
+                        {{ csrf_field() }}
+                    </form>
                     @else
+                    <a href="#" id="login-btn">Entrar</a>
                     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
                     <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
                     @endauth
@@ -56,6 +65,7 @@
     <div class="login-form-container">
 
         <div id="close-login-btn" class="fas fa-times"></div>
+        <x-jet-validation-errors class="mb-4" />
 
         <form  method="POST" action="{{ route('login') }}">
             <h3>Entrar</h3>
@@ -84,7 +94,6 @@
 
             <div class="content">
                 <h3>Adicionados recentemente</h3>
-
                 <a href="#" class="btn">Reserve agora</a>
             </div>
 

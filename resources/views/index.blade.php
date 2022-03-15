@@ -54,11 +54,6 @@
                     @endauth
                 @endif
             </div>
-
-        </div>
-
-
-
     </header>
 
 
@@ -99,7 +94,8 @@
 
             <div class="swiper books-slider">
                 <div class="swiper-wrapper">
-                    <a href="#" class="swiper-slide"><img src="image/book-1.png" alt=""></a>
+
+                    <a href="#" class="swiper-slide"><img src="/images/books/c7e6c117447f8a40dddbc8252fa609cd.png" alt=""></a>
                     <a href="#" class="swiper-slide"><img src="image/book-2.png" alt=""></a>
                     <a href="#" class="swiper-slide"><img src="image/book-3.png" alt=""></a>
                     <a href="#" class="swiper-slide"><img src="image/book-4.png" alt=""></a>

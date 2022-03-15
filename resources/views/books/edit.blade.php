@@ -11,8 +11,9 @@
 
 <div class="container">
     <div class="card">
-    <form class="row g-3 card-body" action="{{ route('update_book', ['id' => $book->id]) }}" method="POST">
+    <form class="row g-3 card-body" action="{{ route('update_book', ['id' => $book->id]) }}" method="POST" enctype="multipart/form-data">
   @csrf
+  @method('PUT')
   <div class="form-group col-md-6">
     <label for="title" class="form-label">Title</label>
     <input id="title" name="title" type="text" class="form-control" value="{{ $book->title  }}">
@@ -28,19 +29,10 @@
     <input id="isbn" name="isbn" type="text" class="form-control" value="{{ $book->isbn  }}">
   </div>
 
-  <div class="form-group col-md-6">
-    <label for="image" class="form-label">Book Image</label>
-    <input class="form-control" type="file" id="image" value="{{ $book->image  }}">
-  </div>
 
   <div class="form-group col-md-6">
     <label for="category" class="form-label">Category</label>
     <input id="category" name="category" type="text" class="form-control" value="{{ $book->category  }}">
-  </div>
-
-  <div class="form-group col-md-6">
-    <label for="description" class="form-label">Description</label>
-    <textarea class="form-control" id="description" rows="3"></textarea value="{{ $book->description  }}">
   </div>
 
   <div class="form-group col-md-6">
@@ -49,9 +41,21 @@
   </div>
 
   <div class="form-group col-md-6">
-    <label for="published_at" class="form-label">Published at</label>
-    <input id="published_at" name="published_at" type="text" class="form-control" value="{{ $book->published_at  }}">
-  </div>
+      <label for="published_at">Data do evento:</label>
+      <input type="date" class="form-control" id="published_at" name="published_at" value="{{ $book->published_at->format('Y-m-d') }}">
+</div>
+
+    <div class="form-group col-md-6">
+      <label for="title">Descrição:</label>
+      <textarea name="description" id="description" class="form-control">{{ $book->description }}</textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Book Image</label>
+      <input type="file" id="image" name="image" class="from-control-file">
+      <img src="/images/books/{{ $book->image }}" alt="{{ $book->title }}"  width="100">
+    </div>
+    <br>
   <div class="col-auto">
     <a href="{{ route('showAll') }}" class="btn btn-secondary" >Cancel</a>
 </div>

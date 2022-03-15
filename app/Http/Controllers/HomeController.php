@@ -17,8 +17,6 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        $this->middleware('auth');
-        $this->user = $user;
 
         $user_counters = new stdClass;
         $user_counters->all_users = $this->user->all()->count();

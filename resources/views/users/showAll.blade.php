@@ -31,7 +31,7 @@
             <td>{{ $user->userType }}</td>
             <td>
                 <a href="{{ route('show_user', ['id'=>$user->id]) }}" class="btn-info btn-sm"><i class="bi bi-eye"></i></a>
-                <a href="" class="btn-secondary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                <a href="{{ route('edit_user', ['id'=>$user->id]) }}" class="btn-secondary btn-sm"><i class="bi bi-pencil-square"></i></a>
                 <a href="" onclick="return confirm('Are you sure?')" class="btn-danger btn-sm"><i class="bi bi-trash-fill"></i></a>
             </td>
         </tr>

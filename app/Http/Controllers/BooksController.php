@@ -13,7 +13,6 @@ class BooksController extends Controller
         $this->middleware('auth');
     }
 
-
     public function create(){
         $this->authorize('is_admin');
         return view('books.create');

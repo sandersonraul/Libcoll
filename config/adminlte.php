@@ -252,6 +252,19 @@ return [
             'icon' => 'fa fa-users',
             'can'  => 'is_admin',
         ],
+        [
+            'text' => 'Bookings Management',
+            'url'  => '/bookings/index',
+            'icon' => 'fa fa-tags',
+            'can'  => 'is_admin',
+        ],
+
+        [
+            'text' => 'Lendings Management',
+            'url'  => '/lendings/index',
+            'icon' => 'fa fa-calendar',
+            'can'  => 'is_admin',
+        ],
 
         // Sidebar items:
 

@@ -24,7 +24,7 @@
   <div class="form-group col-md-6">
       <label for="userType">User type?</label>
       <select name="userType" id="userType" class="form-control">
-        @if($user->userType=='admin')
+        @if(Auth::user()->userType == 'admin')
         <option value="user">User</option>
         <option value="librarian">Librarian</option>
         <option value="admin">Admin</option>

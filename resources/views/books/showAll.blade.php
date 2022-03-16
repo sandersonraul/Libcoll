@@ -13,7 +13,7 @@
 </a>
 
 @if (session('success'))
-<div id="alert" class="alert alert-primary" role="alert">
+<div id="alert" class="alert alert-sucess" role="alert">
 <button type="button" class="close" data-dismiss="alert">x</button>
 {{ session('success') }}
 </div>
@@ -28,7 +28,6 @@
             <th scope="col">Author</th>
             <th scope="col">Category</th>
             <th scope="col">Publishing company</th>
-            <th scope="col">Published at</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
         </tr>
@@ -41,13 +40,14 @@
             <td>{{$book->author}}</td>
             <td>{{$book->category}}</td>
             <td>{{$book->publishing_company}}</td>
-            <td>{{$book->published_at->format('d-m-Y')}}</td>
             <td>
-                <?php if($book->status == 1){ ?>
+                @if($book->status == 1)
                     <div class="badge bg-success"> Available</div>
-                <?php } else { ?>
+                @elseif($book->status == 2)
+                    <div class="badge bg-dark">Requested</div>
+                @else
                     <div class="badge bg-secondary"> Unavailable</div>
-                <?php } ?>
+                @endif
             </td>
             <td>
                 <a href="{{ route('show_book', ['id'=>$book->id]) }}" class="btn-info btn-sm"><i class="bi bi-eye"></i></a>

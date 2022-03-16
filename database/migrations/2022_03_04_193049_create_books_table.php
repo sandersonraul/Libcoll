@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
             $table->string('image');
             $table->string('category');
             $table->string('description');
-            $table->string('publishing_company');
+            $table->string('publisher');
             $table->boolean('status')->default(1);
             $table->timestamp('published_at');
             $table->timestamps();

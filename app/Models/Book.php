@@ -15,7 +15,7 @@ class Book extends Model
         'published_at'
     ];
 
-    public function loan(){
-        return $this->hasOne('App\Models\Loan');
+    public function lendings(){
+        return $this->hasOne('App\Models\Lending');
     }
 }

@@ -8,9 +8,20 @@
     <title>Libcoll</title>
 
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+
+    <style>
+        a {
+
+            text-decoration: none !important
+
+        }
+    </style>
 </head>
 
 <body>
@@ -34,7 +45,7 @@
                     @auth
                     <a href="{{ route('dashboard') }}">Profile</a>
                     @php( $logout_url = View::getSection('logout_url') ?? config('adminlte.logout_url', 'logout') )
-                    <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a class="" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         {{ __('adminlte::adminlte.log_out') }}
                     </a>
                     <form id="logout-form" action="{{ $logout_url }}" method="POST" style="display: none;">
@@ -44,7 +55,6 @@
                         {{ csrf_field() }}
                     </form>
                     @else
-
                     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
                     <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
                     @endauth
@@ -52,27 +62,45 @@
             </div>
     </header>
 
-
-    <section class="home" id="home">
-        <div class="row">
-            <div class="content">
-                <h3>Adicionados recentemente</h3>
-                <a href="#" class="btn">Reserve agora</a>
+    <section class="featured" id="featured">
+        <h1 class="heading"> <span>Books</span> </h1>
+        @if (session('msg'))
+        <div class="d-flex justify-content-center">
+            <div id="alert" class="alert alert-primary" role="alert" style="width:50%">
+            <button type="button" class="close" data-dismiss="alert">x</button>
+            <p style=" height:10px; font-size:1.5rem; padding:0;">{{ session('msg') }}</p>
             </div>
-                <div class="swiper books-slider">
-                @foreach($books as $book)
-                        <div class="swiper-wrapper">
-                        @foreach($book as $data)
-                            <a href="" class="swiper-slide">
-                                <img src="/images/books/{{ $data->image }}">
-                            </a>
-                        @endforeach
-                        </div>
-                    <img src="/images/stand.png" class="stand" alt="">
-                @endforeach
-                </div>
         </div>
 
+        @endif
+        <div class="featured-slider">
+            <div class="swiper-wrapper">
+            @foreach($books as $book)
+                <div class="swiper-slide box">
+                    <div class="image">
+                        <img src="/images/books/{{ $book->image }}" alt="{{ $book->title }}">
+                    </div>
+                    <div class="content">
+                        @if($book->status == 1)
+                            <div class="badge bg-info"><h4 style="height:12px; color:white;">Available</h4></div>
+                        @elseif($book->status == 2)
+                            <div class="badge bg-dark"><h4 style="height:12px; color:white;">Requested</h4></div>
+                        @else
+                            <div class="badge bg-secondary"><h4 style="height:12px; color:white;"> Unavailable</h4></div>
+                        @endif
+                        <br>
+                        <br>
+                        <h4>{{$book->title}}</h4>
+                            @if($book->status==1)
+                                <a href="{{ route('save_booking', ['id'=>$book->id]) }}" class="btn">Book now</a>
+                            @else
+                                <a href="#" class="btn disabled" aria-disabled="true">Book now</a>
+                            @endif
+                    </div>
+                </div>
+            @endforeach
+            </div>
+        </div>
 
     </section>
 
@@ -97,10 +125,13 @@
         </div>
     </section>
 
-    <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
-    <script>
-        searchForm = document.querySelector('.search-form');
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
+<script>
+searchForm = document.querySelector('.search-form');
 
 document.querySelector('#search-btn').onclick = () => {
   searchForm.classList.toggle('active');
@@ -140,9 +171,10 @@ function fadeOut() {
   setTimeout(loader, 4000);
 }
 
-var swiper = new Swiper(".books-slider", {
-  loop: true,
-  centeredSlides: true,
+var swiper = new Swiper(".featured-slider", {
+  spaceBetween: 10,
+  loop: false,
+  centeredSlides: false ,
   autoplay: {
     delay: 9500,
     disableOnInteraction: false,
@@ -151,25 +183,18 @@ var swiper = new Swiper(".books-slider", {
     0: {
       slidesPerView: 1,
     },
-    768: {
+    450: {
       slidesPerView: 2,
     },
-    1024: {
+    768: {
       slidesPerView: 3,
+    },
+    1024: {
+      slidesPerView: 4,
     },
   },
 });
     </script>
-
 </body>
 
 </html>
-
-
-@section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
-
-@section('js')
-
-@stop

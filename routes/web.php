@@ -14,9 +14,8 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+Route::get('/', 'IndexController@index')->name('home');
+Route::get('/catalog', 'IndexController@show')->name('catalog');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
@@ -36,9 +35,11 @@ Route::put('/update/user{id}','UsersController@update')->name('update_user');
 Route::get('/users/index','UsersController@showAll')->name('showAllUsers');
 
 
-Route::get('/new/loan','LoansController@create')->name('new_loan');
-Route::post('/new/loan','LoansController@store')->name('save_loan');
-Route::get('/loans/index','LoansController@index')->name('loans_index');
-Route::get('/loans/approve{id}','LoansController@approve')->name('approve');
-Route::get('/loans/reject{id}','LoansController@reject')->name('reject');
-Route::get('/loans/return/book{id}','LoansController@returnBook')->name('return_book');
+Route::get('/new/lending','LendingsController@create')->name('new_lending');
+Route::post('/new/lending','LendingsController@store')->name('save_lending');
+Route::get('/lendings/index','LendingsController@index')->name('lendings_index');
+Route::get('/lendings/return/book{id}','LendingsController@returnBook')->name('return_book');
+
+
+Route::get('/new/booking{id}','BookingsController@store')->name('save_booking');
+Route::get('/bookings/index','BookingsController@index')->name('bookings_index');

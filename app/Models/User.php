@@ -60,7 +60,7 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function loans(){
-        return $this->hasMany('App\Models\Loan');
+    public function lendings(){
+        return $this->hasMany('App\Models\Lending');
     }
 }

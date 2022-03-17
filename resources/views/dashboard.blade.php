@@ -54,6 +54,18 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-lg-3 col-6">
+                    <div class="small-box bg-outline-dark">
+                        <div class="inner">
+                            <h3>{{ $books }}</h3>
+                            <p>All books</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-stats-bars"></i>
+                        </div>
+                    </div>
+                </div>
             @endcan
 </div>
 @stop

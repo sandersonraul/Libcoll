@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Lending;
 use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\Booking;
 use Carbon\Carbon;
 
 class LendingsController extends Controller
@@ -37,8 +37,10 @@ class LendingsController extends Controller
         $lending->borrowed_at = $request->borrowed_at;
         $lending->devolution_date = $request->devolution_date;
         $lending->returned_at = $request->returned_at;
+        $booking = Booking::where('user_id', $lending->user_id)->where('book_id', $lending->book_id);
         $lending->save();
         $book->save();
+        $booking->delete();
         return redirect('/lendings/index')->with('msg', 'Created sucessfully');
     }
 

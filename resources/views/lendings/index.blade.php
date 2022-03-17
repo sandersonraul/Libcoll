@@ -36,7 +36,7 @@
             <td>{{ $lending->borrowed_at->format('Y-m-d')}}</td>
             <td>{{ $lending->devolution_date->format('Y-m-d')}}</td>
             <td>{{ $lending->returned_at}}</td>
-            <td>
+            <td class="btn-group">
             @if($lending->status == 'borrowed')
             <a href="{{ route('return_book', ['id'=>$lending->id]) }}" class="btn-info btn-sm">Return book</a>
             </td>

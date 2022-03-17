@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use stdClass;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Book;
 
 class HomeController extends Controller
 {
@@ -23,10 +24,9 @@ class HomeController extends Controller
         $user_counters->admin_users = $this->user->where('userType','admin')->count();
         $user_counters->librarian_users = $this->user->where('userType','librarian')->count();
         $user_counters->users = $this->user->where('userType','user')->count();
-
+        $books = Book::all()->count();
         $users = $this->user->paginate(5);
 
-        return view('dashboard',['users'=>$users,
-                            'user_counters'=>$user_counters]);
+        return view('dashboard',['users'=>$users,'user_counters'=>$user_counters, 'books'=> $books]);
     }
 }

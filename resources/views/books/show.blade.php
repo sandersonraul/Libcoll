@@ -39,7 +39,7 @@
                         <b>Description: </b> {{ $book->description }}
                     </li>
                     <li class="list-group-item">
-                        <b>Publishing company: </b>{{$book->publishing_company}}
+                        <b>Publisher: </b>{{$book->publisher}}
                     </li>
                     <li class="list-group-item">
                         <b>Published at: </b>{{$book->published_at->format('d-m-Y')}}

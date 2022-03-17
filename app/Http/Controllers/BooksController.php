@@ -26,7 +26,7 @@ class BooksController extends Controller
         $book->isbn = $request->isbn;
         $book->category = $request->category;
         $book->description = $request->description;
-        $book->publishing_company = $request->publishing_company;
+        $book->publisher = $request->publisher;
         $book->published_at = $request->published_at;
 
         // Image Upload

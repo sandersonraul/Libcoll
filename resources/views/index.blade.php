@@ -28,8 +28,8 @@
 
             <div class="icons">
                 <div id="search-btn" class="fas fa-search"></div>
-                <a href="{{ route('home') }}">Início</a>
-                <a href="{{ route('catalog') }}">Catálogo</a>
+                <a href="{{ route('home') }}">Home</a>
+                <a href="{{ route('catalog') }}">Books</a>
                 @if (Route::has('login'))
                     @auth
                     <a href="{{ route('dashboard') }}">Profile</a>
@@ -56,20 +56,20 @@
     <section class="home" id="home">
         <div class="row">
             <div class="content">
-                <h3>Adicionados recentemente</h3>
-                <a href="#" class="btn">Reserve agora</a>
+                <h3>Recently added</h3>
+                <a href="{{ route('catalog') }}" class="btn">Book now</a>
             </div>
                 <div class="swiper books-slider">
-                @foreach($books as $book)
                         <div class="swiper-wrapper">
+                    @foreach($books as $book)
                         @foreach($book as $data)
-                            <a href="" class="swiper-slide">
+                            <a href="{{ route('show_book', ['id'=>$data->id]) }}" class="swiper-slide">
                                 <img src="/images/books/{{ $data->image }}">
                             </a>
                         @endforeach
+                    @endforeach
                         </div>
                     <img src="/images/stand.png" class="stand" alt="">
-                @endforeach
                 </div>
         </div>
 
@@ -81,7 +81,7 @@
         <div class="box-container">
 
             <div class="box">
-                <h3>Entre em contato:</h3>
+                <h3>Contact:</h3>
                 <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
                 <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
                 <a href="#"> <i class="fas fa-envelope"></i> minhabiblioteca@gmail.com </a>
@@ -100,65 +100,57 @@
     <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
 
     <script>
-        searchForm = document.querySelector('.search-form');
+        window.onscroll = () => {
 
-document.querySelector('#search-btn').onclick = () => {
-  searchForm.classList.toggle('active');
-}
+        searchForm.classList.remove('active');
 
+        if (window.scrollY > 80) {
+        document.querySelector('.header .header-2').classList.add('active');
+        } else {
+        document.querySelector('.header .header-2').classList.remove('active');
+        }
 
+        }
 
-window.onscroll = () => {
+        window.onload = () => {
 
-  searchForm.classList.remove('active');
+        if (window.scrollY > 80) {
+        document.querySelector('.header .header-2').classList.add('active');
+        } else {
+        document.querySelector('.header .header-2').classList.remove('active');
+        }
 
-  if (window.scrollY > 80) {
-    document.querySelector('.header .header-2').classList.add('active');
-  } else {
-    document.querySelector('.header .header-2').classList.remove('active');
-  }
+        fadeOut();
 
-}
+        }
 
-window.onload = () => {
+        function loader() {
+        document.querySelector('.loader-container').classList.add('active');
+        }
 
-  if (window.scrollY > 80) {
-    document.querySelector('.header .header-2').classList.add('active');
-  } else {
-    document.querySelector('.header .header-2').classList.remove('active');
-  }
+        function fadeOut() {
+        setTimeout(loader, 4000);
+        }
 
-  fadeOut();
-
-}
-
-function loader() {
-  document.querySelector('.loader-container').classList.add('active');
-}
-
-function fadeOut() {
-  setTimeout(loader, 4000);
-}
-
-var swiper = new Swiper(".books-slider", {
-  loop: true,
-  centeredSlides: true,
-  autoplay: {
-    delay: 9500,
-    disableOnInteraction: false,
-  },
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
-    },
-    768: {
-      slidesPerView: 2,
-    },
-    1024: {
-      slidesPerView: 3,
-    },
-  },
-});
+        var swiper = new Swiper(".books-slider", {
+        loop: true,
+        centeredSlides: true,
+        autoplay: {
+        delay: 9500,
+        disableOnInteraction: false,
+        },
+        breakpoints: {
+        0: {
+            slidesPerView: 1,
+        },
+        768: {
+            slidesPerView: 2,
+        },
+        1024: {
+            slidesPerView: 3,
+        },
+        },
+        });
     </script>
 
 </body>

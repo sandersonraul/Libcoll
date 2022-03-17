@@ -39,8 +39,8 @@
 
             <div class="icons">
                 <div id="search-btn" class="fas fa-search"></div>
-                <a href="{{ route('home') }}">Início</a>
-                <a href="{{ route('catalog') }}">Catálogo</a>
+                <a href="{{ route('home') }}">Home</a>
+                <a href="{{ route('catalog') }}">Books</a>
                 @if (Route::has('login'))
                     @auth
                     <a href="{{ route('dashboard') }}">Profile</a>
@@ -73,10 +73,10 @@
         </div>
 
         @endif
-        <div class="featured-slider">
-            <div class="swiper-wrapper">
+        <div class="featured-slider" style="width:100%;">
+            <div class="row row-cols-2 row-cols-md-4 row d-flex justify-content-between" style="width:100%; margin-left:5px;">
             @foreach($books as $book)
-                <div class="swiper-slide box">
+                <div class="box" style="width:24%;">
                     <div class="image">
                         <img src="/images/books/{{ $book->image }}" alt="{{ $book->title }}">
                     </div>
@@ -109,7 +109,7 @@
         <div class="box-container">
 
             <div class="box">
-                <h3>Entre em contato:</h3>
+                <h3>Contact:</h3>
                 <a href="#"> <i class="fas fa-phone"></i> +123-456-7890 </a>
                 <a href="#"> <i class="fas fa-phone"></i> +111-222-3333 </a>
                 <a href="#"> <i class="fas fa-envelope"></i> minhabiblioteca@gmail.com </a>
@@ -129,72 +129,6 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-
-<script>
-searchForm = document.querySelector('.search-form');
-
-document.querySelector('#search-btn').onclick = () => {
-  searchForm.classList.toggle('active');
-}
-
-
-
-window.onscroll = () => {
-
-  searchForm.classList.remove('active');
-
-  if (window.scrollY > 80) {
-    document.querySelector('.header .header-2').classList.add('active');
-  } else {
-    document.querySelector('.header .header-2').classList.remove('active');
-  }
-
-}
-
-window.onload = () => {
-
-  if (window.scrollY > 80) {
-    document.querySelector('.header .header-2').classList.add('active');
-  } else {
-    document.querySelector('.header .header-2').classList.remove('active');
-  }
-
-  fadeOut();
-
-}
-
-function loader() {
-  document.querySelector('.loader-container').classList.add('active');
-}
-
-function fadeOut() {
-  setTimeout(loader, 4000);
-}
-
-var swiper = new Swiper(".featured-slider", {
-  spaceBetween: 10,
-  loop: false,
-  centeredSlides: false ,
-  autoplay: {
-    delay: 9500,
-    disableOnInteraction: false,
-  },
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
-    },
-    450: {
-      slidesPerView: 2,
-    },
-    768: {
-      slidesPerView: 3,
-    },
-    1024: {
-      slidesPerView: 4,
-    },
-  },
-});
-    </script>
 </body>
 
 </html>

@@ -1,7 +1,9 @@
 <x-guest-layout>
     <x-jet-authentication-card>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <x-slot name="logo">
-            <x-jet-authentication-card-logo />
+        <a href="{{ route('home') }}" class="logo" style="font-size: 2.5rem; font-weight: bolder; color:#083B66;">
+        <i class="fas fa-book"></i> Libcoll </a>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -45,13 +47,13 @@
                     </x-jet-label>
                 </div>
             @endif
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+            <div class="mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}
                 </a>
-
-                <x-jet-button class="ml-4">
+            </div>
+            <div class="flex items-center justify-center mt-4">
+                <x-jet-button class="items-center justify-center"  style="background-color:#083B66; width: 50%; :center; ">
                     {{ __('Register') }}
                 </x-jet-button>
             </div>

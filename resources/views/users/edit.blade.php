@@ -26,7 +26,7 @@
   <div class="form-group col-md-6">
       <label for="userType">User type</label>
       <select name="userType" id="userType" class="form-control">
-      @if($user->userType=='admin')
+      @if(Auth::user()->userType=='admin')
         <option value="admin" {{ $user->userType == 'admin' ? "selected='selected'" : "" }}>Admin</option>
         <option value="librarian" {{ $user->userType == 'librarian' ? "selected='selected'" : "" }}>Librarian</option>
         <option value="user" {{ $user->userType == 'user' ? "selected='selected'" : "" }}>User</option>
@@ -38,7 +38,7 @@
 
   <div class="form-group col-md-6">
     <label for="password" class="form-label">password</label>
-    <input id="password" name="password" type="text" class="form-control" value="{{ $user->password  }}">
+    <input id="password" name="password" type="password" class="form-control">
   </div>
 
   <div class="col-auto">

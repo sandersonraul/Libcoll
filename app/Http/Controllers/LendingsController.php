@@ -23,7 +23,7 @@ class LendingsController extends Controller
     public function create() {
         $this->authorize('is_admin');
         $users = User::all();
-        $data = Book::where('status',1)->get();
+        $data = Book::where('status','<>',0)->get();
         return view('Lendings.create', ['data'=>$data, 'users'=>$users]);
     }
 
@@ -39,7 +39,7 @@ class LendingsController extends Controller
         $lending->returned_at = $request->returned_at;
         $lending->save();
         $book->save();
-        return redirect()->back()->with('msg', 'Created sucessfully');
+        return redirect('/lendings/index')->with('msg', 'Created sucessfully');
     }
 
     public function returnBook($id){

@@ -9,6 +9,10 @@ class Booking extends Model
 {
     use HasFactory;
 
+    protected $dates = [
+        'withdraw'
+    ];
+
     public function user(){
         return $this->belongsTo('App\Models\User');
     }

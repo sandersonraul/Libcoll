@@ -27,7 +27,6 @@ class BookingsController extends Controller
     }
 
     public function store(Request $request, $id) {
-        $this->authorize('is_admin');
         $booking = new Booking;
         $book = Book::find($id);
         if($book->status == 1){

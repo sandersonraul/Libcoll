@@ -13,9 +13,10 @@
     <thead>
         <tr>
             <th scope="col">ID</th>
+            <th scope="col">User ID</th>
             <th scope="col">User Name</th>
+            <th scope="col">Book ID</th>
             <th scope="col">Book</th>
-            <th scope="col">Status</th>
             <th scope="col">Withdraw</th>
         </tr>
     </thead>
@@ -23,10 +24,10 @@
         @foreach ($bookings as $booking)
         <tr>
             <td>{{ $booking->id}}</td>
-
+            <td>{{ $booking->user_id}}</td>
             <td>{{ collect(explode(' ', $booking->user->name))->slice(0, 2)->implode(' ') }}</td>
+            <td>{{ $booking->book_id}}</td>
             <td>{{ $booking->book->title }}</td>
-            <td>{{ $booking->status}}</td>
             <td>{{ $booking->withdraw}}</td>
         </tr>
         @endforeach

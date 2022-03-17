@@ -13,9 +13,11 @@
 </a>
 
 @if (session('success'))
-<div id="alert" class="alert alert-sucess" role="alert">
-<button type="button" class="close" data-dismiss="alert">x</button>
-{{ session('success') }}
+<div class="d-flex justify-content-center">
+    <div id="alert" class="alert alert-success" role="alert" style="width:50%;">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <p style=" height:15px; font-size:1.2rem; padding:0;">{{ session('success') }}</p>
+    </div>
 </div>
 @endif
 <div class="table-responsive card-body d-flex justify-content-center">
@@ -26,8 +28,6 @@
             <th scope="col">Cover</th>
             <th scope="col">Title</th>
             <th scope="col">Author</th>
-            <th scope="col">Category</th>
-            <th scope="col">Publishing company</th>
             <th scope="col">Status</th>
             <th scope="col">Actions</th>
         </tr>
@@ -38,8 +38,6 @@
             <td><img src="/images/books/{{ $book->image }}" alt="{{ $book->title }}" width="100"></td>
             <td>{{$book->title}}</td>
             <td>{{$book->author}}</td>
-            <td>{{$book->category}}</td>
-            <td>{{$book->publishing_company}}</td>
             <td>
                 @if($book->status == 1)
                     <div class="badge bg-success"> Available</div>
@@ -52,25 +50,9 @@
             <td>
                 <a href="{{ route('show_book', ['id'=>$book->id]) }}" class="btn-info btn-sm"><i class="bi bi-eye"></i></a>
                 <a href="{{ route('edit_book', ['id'=>$book->id]) }}" class="btn-secondary btn-sm"><i class="bi bi-pencil-square"></i></a>
-                <a class="btn-danger btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="bi bi-trash-fill"></i></a>
+                <a href="{{ route('destroy_book', ['id'=>$book->id]) }}" onclick="return confirm('Are you sure?')" class="btn-danger btn-sm"><i class="bi bi-trash-fill"></i></a>
             </td>
         </tr>
-        <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-      </div>
-      <div class="modal-body">
-      <h5 class="text-center">Are you sure you want to delete this book ?</h5>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <a href="{{ route('destroy_book', ['id'=>$book->id]) }}" class="btn btn-danger">delete</a>
-      </div>
-    </div>
-  </div>
-</div>
         @endforeach
     </tbody>
 </table>

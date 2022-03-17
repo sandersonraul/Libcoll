@@ -16,38 +16,38 @@
   @method('PUT')
   <div class="form-group col-md-6">
     <label for="title" class="form-label">Title</label>
-    <input id="title" name="title" type="text" class="form-control" value="{{ $book->title  }}">
+    <input id="title" name="title" type="text" class="form-control" value="{{ $book->title  }}" required>
   </div>
 
   <div class="form-group col-md-6">
     <label for="author" class="form-label">Author</label>
-    <input id="author" name="author" type="text" class="form-control" value="{{ $book->author  }}">
+    <input id="author" name="author" type="text" class="form-control" value="{{ $book->author  }}" required>
   </div>
 
   <div class="form-group col-md-6">
     <label for="isbn" class="form-label">ISBN</label>
-    <input id="isbn" name="isbn" type="text" class="form-control" value="{{ $book->isbn  }}">
+    <input id="isbn" name="isbn" type="text" class="form-control" value="{{ $book->isbn  }}" required>
   </div>
 
 
   <div class="form-group col-md-6">
     <label for="category" class="form-label">Category</label>
-    <input id="category" name="category" type="text" class="form-control" value="{{ $book->category  }}">
+    <input id="category" name="category" type="text" class="form-control" value="{{ $book->category  }}" required>
   </div>
 
   <div class="form-group col-md-6">
-    <label for="publishing_company" class="form-label">Publishing company</label>
-    <input id="publishing_company" name="publishing_company" type="text" class="form-control" value="{{ $book->publishing_company  }}">
+    <label for="publisher" class="form-label">Publisher</label>
+    <input id="publisher" name="publisher" type="text" class="form-control" value="{{ $book->publisher  }}" required>
   </div>
 
   <div class="form-group col-md-6">
       <label for="published_at">Data do evento:</label>
-      <input type="date" class="form-control" id="published_at" name="published_at" value="{{ $book->published_at->format('Y-m-d') }}">
+      <input type="date" class="form-control" id="published_at" name="published_at" value="{{ $book->published_at->format('Y-m-d') }}" required>
 </div>
 
     <div class="form-group col-md-6">
       <label for="title">Descrição:</label>
-      <textarea name="description" id="description" class="form-control">{{ $book->description }}</textarea>
+      <textarea name="description" id="description" class="form-control">{{ $book->description }}</textarea required>
     </div>
 
     <div class="form-group">

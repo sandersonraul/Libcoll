@@ -16,6 +16,7 @@ use App\Http\Controllers\HomeController;
 
 Route::get('/', 'IndexController@index')->name('home');
 Route::get('/catalog', 'IndexController@show')->name('catalog');
+Route::get('/book{id}', 'IndexController@showBook')->name('book');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('dashboard', [App\Http\Controllers\HomeController::class, 'dashboard'])->name('dashboard');
 
@@ -31,6 +32,7 @@ Route::get('/new/user','UsersController@create')->name('new_user');
 Route::post('/new/user','UsersController@store')->name('save_user');
 Route::get('/show/user{id}','UsersController@show')->name('show_user');
 Route::get('/edit/user{id}','UsersController@edit')->name('edit_user');
+Route::get('/delete/user{id}','UsersController@destroy')->name('delete_user');
 Route::put('/update/user{id}','UsersController@update')->name('update_user');
 Route::get('/users/index','UsersController@showAll')->name('showAllUsers');
 

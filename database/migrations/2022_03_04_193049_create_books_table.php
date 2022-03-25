@@ -20,7 +20,7 @@ class CreateBooksTable extends Migration
             $table->string('isbn');
             $table->string('image');
             $table->string('category');
-            $table->string('description');
+            $table->string('description',10000);
             $table->string('publisher');
             $table->boolean('status')->default(1);
             $table->timestamp('published_at');

@@ -63,7 +63,7 @@
                         <div class="swiper-wrapper">
                     @foreach($books as $book)
                         @foreach($book as $data)
-                            <a href="{{ route('show_book', ['id'=>$data->id]) }}" class="swiper-slide">
+                            <a href="{{ route('book', ['id'=>$data->id]) }}" class="swiper-slide">
                                 <img src="/images/books/{{ $data->image }}">
                             </a>
                         @endforeach

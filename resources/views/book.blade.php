@@ -62,11 +62,11 @@
             </div>
     </header>
 
+    <section class="home" style="padding-top:0px; padding-bottom:0px">
     <section class="featured" id="featured">
-        <h1 class="heading"> <span>Books</span> </h1>
         @if (session('msg'))
         <div class="d-flex justify-content-center">
-            <div id="alert" class="alert alert-primary" role="alert" style="width:50%">
+            <div id="alert" class="alert alert-primary" role="alert" style="width:70%">
             <button type="button" class="close" data-dismiss="alert">x</button>
             <p style=" height:10px; font-size:1.5rem; padding:0;">{{ session('msg') }}</p>
             </div>
@@ -74,11 +74,8 @@
 
         @endif
         <div class="featured-slider" style="width:100%;">
-            <div class="row row-cols-2 row-cols-md-4 row d-flex justify-content-between" style="width:100%; margin-left:5px;">
-            @foreach($books as $book)
-
-                <a href="{{ route('book', ['id'=>$book->id]) }}" style="color:black;">
-                <div class="box" style="width:24%;">
+            <div class="container d-flex justify-content-center">
+                <div class="box" style="width:70%;">
                     <div class="image">
                         <img src="/images/books/{{ $book->image }}" alt="{{ $book->title }}">
                     </div>
@@ -92,7 +89,13 @@
                         @endif
                         <br>
                         <br>
-                        <h4>{{collect(explode(' ', $book->title))->slice(0, 4)->implode(' ')}}...</h4>
+                        <h3>{{$book->title}}</h3>
+                        <h4><b>Author:</b>{{$book->author}}</h4>
+                        <br>
+                        <h4 style="text-align:left;"><b>Publisher: </b>{{$book->publisher}}</h4>
+                        <h4 style="text-align:left;"><b>Publication date: </b>{{$book->published_at->format('d-m-Y')}}</h4>
+                        <br>
+                        <h4 style="text-align:left;"> <b>Description:</b> {{$book->description}}</h4>
                             @if($book->status==1)
                                 <a href="{{ route('save_booking', ['id'=>$book->id]) }}" class="btn">Book now</a>
                             @else
@@ -100,17 +103,13 @@
                             @endif
                     </div>
                 </div>
-                </a>
 
-            @endforeach
             </div>
         </div>
 
-        <div class="d-flex justify-content-center">
-            {{$books->links()}}
-        </div>
-
     </section>
+    </section>
+
 
     <section class="footer">
 

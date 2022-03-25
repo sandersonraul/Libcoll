@@ -13,7 +13,12 @@ class IndexController extends Controller
     }
 
     public function show(){
-        $books = Book::orderBy('title', 'asc')->get();
+        $books = Book::orderBy('title', 'asc')->paginate(8);
         return view('catalog', ['books'=> $books]);
+    }
+
+    public function showBook($id){
+        $book = Book::findOrFail($id);
+        return view('book', ['book' => $book]);
     }
 }

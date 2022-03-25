@@ -26,11 +26,14 @@
                         <b>ISBN: </b> {{ $book->isbn }}
                     </li>
                     <li class="list-group-item">
-                        <b>Status: </b> <?php if($book->status == 1){ ?>
-                    <div class="badge bg-success"> Available</div>
-                <?php } else { ?>
-                    <div class="badge bg-secondary"> Unavailable</div>
-                <?php } ?>
+                        <b>Status: </b>
+                        @if($book->status == 1)
+                            <div class="badge bg-success"> Available</div>
+                        @elseif($book->status == 2)
+                            <div class="badge bg-dark">Requested</div>
+                        @else
+                            <div class="badge bg-secondary"> Unavailable</div>
+                        @endif
                     </li>
                     <li class="list-group-item">
                         <b>Category: </b> {{ $book->category }}

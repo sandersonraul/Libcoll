@@ -29,7 +29,7 @@ class UsersController extends Controller
             'userType' => $request->userType,
             'password' => Hash::make($request['password']),
         ]);
-        return  'criado com sucesso';
+        return redirect('/users/index')->with('sucess', 'User created successfuly');
     }
 
     public function edit($id){
@@ -50,6 +50,13 @@ class UsersController extends Controller
         return redirect('/users/index')->with('sucess', 'User updated successfuly');
     }
 
+    public function destroy($id){
+        $this->authorize('is_admin');
+        $user=User::findOrFail($id);
+        $user->delete();
+        return redirect('/users/index')->with('sucess', 'User deleted successfuly');;
+    }
+
     public function show($id){
         $this->authorize('is_admin');
         $user = User::findOrFail($id);
@@ -58,7 +65,7 @@ class UsersController extends Controller
 
     public function showAll(){
         $this->authorize('is_admin');
-        $users = User::orderBy('created_at', 'desc')->get();
+        $users = User::orderBy('created_at', 'desc')->paginate(5);
         return view('users.showAll',['users' => $users]);
     }
 }

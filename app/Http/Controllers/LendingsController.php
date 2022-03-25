@@ -34,8 +34,8 @@ class LendingsController extends Controller
         $lending->book_id = $request->book_id;
         $book = Book::find($request->book_id);
         $book->status = 0;
-        $lending->borrowed_at = $request->borrowed_at;
-        $lending->devolution_date = $request->devolution_date;
+        $lending->borrowed_at = Carbon::now();
+        $lending->devolution_date = Carbon::now()->addDay(5);
         $lending->returned_at = $request->returned_at;
         $booking = Booking::where('user_id', $lending->user_id)->where('book_id', $lending->book_id);
         $lending->save();
@@ -44,15 +44,23 @@ class LendingsController extends Controller
         return redirect('/lendings/index')->with('msg', 'Created sucessfully');
     }
 
+    public function renewBook($id){
+        $data = Lending::findOrFail($id);
+
+    }
+
     public function returnBook($id){
         $this->authorize('is_admin');
         $data = Lending::findOrFail($id);
         $data->status = 'returned';
         $data->returned_at = Carbon::now();
         $data->save();
-        $book = Book::find($data->book_id);
+        $book = Book::findOrFail($data->book_id);
         $book->status = 1;
         $book->save();
+        $user = User::FindOrFail($data->user_id);
+        $user->status = 1;
+        $user->save();
         return redirect()->back();
     }
 }

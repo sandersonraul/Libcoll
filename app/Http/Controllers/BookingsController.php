@@ -27,6 +27,7 @@ class BookingsController extends Controller
     }
 
     public function store(Request $request, $id) {
+        $this->middleware('CheckPenalty');
         $booking = new Booking;
         $book = Book::find($id);
         if($book->status == 1){
@@ -40,6 +41,16 @@ class BookingsController extends Controller
             return redirect()->back()->with('msg', 'Resquest complete, you have two days to get your book at the library');
         } else{
             return redirect()->back()->with('msg', 'Book unavailable');
+        }
+    }
+
+    public function show(){
+        $user = auth()->user();
+        $bookings = Booking::all();
+        foreach($bookings as $booking){
+            if($booking->user_id == $user->id){
+                return view('dashboard', ['booking'=>$booking]);
+            }
         }
     }
 }

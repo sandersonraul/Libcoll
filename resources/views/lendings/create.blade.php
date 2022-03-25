@@ -12,7 +12,7 @@
     <div class="card">
         <form class="row g-3 card-body" action="{{ route('save_lending') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
         <label for="user_id">User</label>
         <select name="user_id" id="userType" class="form-control">
             @foreach($users as $user)
@@ -21,23 +21,13 @@
         </select>
         </div>
 
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-6">
         <label for="book_id">Book</label>
         <select name="book_id" id="book_id" class="form-control">
             @foreach($data as $row)
             <option value="{{ $row->id }}">{{$row->title}}</option>
             @endforeach
         </select>
-        </div>
-
-        <div class="form-group col-md-2">
-            <label for="borrowed_at" class="form-label">borrowed_at</label>
-            <input id="borrowed_at" name="borrowed_at" type="date" class="form-control">
-        </div>
-
-        <div class="form-group col-md-2">
-            <label for="devolution_date" class="form-label">devolution_date</label>
-            <input id="devolution_date" name="devolution_date" type="date" class="form-control">
         </div>
         <br>
         <div class="col-auto">

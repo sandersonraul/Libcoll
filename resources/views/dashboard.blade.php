@@ -2,13 +2,11 @@
 
 @section('title', 'Dashboard')
 
-@section('content_header')
-    <h1>Dashboard</h1>
-@stop
 
 @section('content')
 <div class="container-fluid">
         @can('is_admin')
+        <h3>Dashboard</h3>
             <div class="row">
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-info">
@@ -24,8 +22,8 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-dark">
                         <div class="inner">
-                            <h3>{{ $user_counters->admin_users }}</h3>
-                            <p>Administrators</p>
+                            <h3>{{ $books }}</h3>
+                            <p>All Books</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
@@ -54,19 +52,25 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-outline-dark">
-                        <div class="inner">
-                            <h3>{{ $books }}</h3>
-                            <p>All books</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
-                        </div>
+            @endcan
+</div>
+@if(count($bookings) != 0)
+<br>
+<h3>Requested Books</h3>
+@endif
+<div class="container-fluid">
+    <div class="row">
+        @foreach($bookings as $booking)
+                <div class="col-sm-2">
+                    <div class="card">
+                    <div class="text-center"><img src="/images/books/{{ $booking->book->image }}" alt="{{ $booking->book->title }}" width="150"></div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{$booking->book->title}}</h5>
+                    </div>
                     </div>
                 </div>
-            @endcan
+        @endforeach
+    </div>
 </div>
 @stop
 

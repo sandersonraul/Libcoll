@@ -30,5 +30,13 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+
+        Gate::define('pendding', function ($user){
+            if($user->status == 1){
+                return true;
+            }
+        });
+
+
     }
 }

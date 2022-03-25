@@ -1,10 +1,16 @@
+
+
 <x-guest-layout>
     <x-jet-authentication-card>
+    @if (session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline">{{ session('error') }}</span>
+        </div>
+    @endif
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <x-slot name="logo">
-        <a href="{{ route('home') }}" class="logo" style="font-size: 2.5rem;
-    font-weight: bolder;
-    color:#083B66;"><i class="fas fa-book"></i> Libcoll </a>
+        <a href="{{ route('home') }}" class="logo" style="font-size: 2.5rem; font-weight: bolder;color:#083B66;">
+            <i class="fas fa-book"></i> Libcoll </a>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

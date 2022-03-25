@@ -56,7 +56,7 @@ class BooksController extends Controller
 
     public function showAll(){
         $this->authorize('is_admin');
-        $books = Book::all();
+        $books = Book::paginate(3);
         return view('books.showAll',['books' => $books]);
     }
 
@@ -94,6 +94,6 @@ class BooksController extends Controller
         }
 
         Book::findOrFail($request->id)->update($data);
-        return redirect('/show/books')->with('sucess', 'book updated successfully');
+        return redirect('/show/books');
     }
 }
